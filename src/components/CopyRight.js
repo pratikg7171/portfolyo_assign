@@ -1,4 +1,24 @@
-const CopyRight = ({ brandName }) => {
+import { useEffect, useState } from "react";
+import { fatchData } from "../utilits";
+
+const apiUrl = process.env.API_URL;
+
+const CopyRight = () => {
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const userData = await fatchData(apiUrl); // Fetch user data from the API URL
+        setUsername(userData.user.username); // Extract username from the user data
+      } catch (error) {
+        console.error("Error fetching username:", error);
+      }
+    };
+
+    fetchUsername();
+  }, []);
+
   return (
     <div className="dizme_tm_section">
       <div className="dizme_tm_copyright">
@@ -12,7 +32,7 @@ const CopyRight = ({ brandName }) => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {brandName && brandName}
+                  {username}
                 </a>{" "}
                 © {new Date().getFullYear()}
               </p>
@@ -33,4 +53,5 @@ const CopyRight = ({ brandName }) => {
     </div>
   );
 };
+
 export default CopyRight;

@@ -20,7 +20,7 @@ const ServicePopup = ({ data, open, close }) => {
           <div className="image">
               {data.image && data.image.url && (
                 <div className="image-container">
-                  <Image src={data.image.url} alt="image" />
+                  <img src={data.image.url} alt="image" />
                   <div
                     className="main"
                     data-Image-url={data.image.url}

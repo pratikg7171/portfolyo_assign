@@ -29,7 +29,7 @@ const About = ({ dark }) => {
             <div className="left">
               <div className="image">
                 {/* Replace <img> with <Image> */}
-                <Image src={`/img/about/${dark ? 2 : 1}.jpg`} alt="image" width={500} height={500} />
+                <img src={`/img/about/${dark ? 2 : 1}.jpg`} alt="image" width={500} height={500} />
                 <div className="numbers year">
                   <div className="wrapper">
                     <h3>
@@ -44,7 +44,7 @@ const About = ({ dark }) => {
                     <span className="name">
                       Years of
                       <br />
-                      Experience
+                      Success
                     </span>
                   </div>
                 </div>
@@ -93,10 +93,10 @@ const About = ({ dark }) => {
           </div>
         </div>
         <div className="brush_1 wow fadeInLeft" data-wow-duration="1s">
-          <Image src="/img/brushes/about/1.png" alt="image" width={200} height={200} />
+          <img src="/img/brushes/about/1.png" alt="image" />
         </div>
         <div className="brush_2 wow fadeInRight" data-wow-duration="1s">
-          <Image src="/img/brushes/about/2.png" alt="image" width={200} height={200} />
+          <img src="/img/brushes/about/2.png" alt="image"  />
         </div>
       </div>
     </div>

@@ -27,9 +27,9 @@ const Process = ({ dark }) => {
                     <div className="list_inner">
                       <div className="icon">
                         <span>
-                          <Image
+                          <img
                             className="brush"
-                            src={`Image/brushes/process${dark ? "/dark" : ""}/${i + 1}.png`}
+                            src={`img/brushes/process${dark ? "/dark" : ""}/${i + 1}.png`}
                             alt="image"
                           />
                           {parse(item.icons[dark ? "dark" : "light"])}

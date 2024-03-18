@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { activeSkillProgress, fatchData } from "../utilits";
-import Image from 'next/image'; 
+import img from 'next/image'; 
 
 const apiUrl = process.env.API_URL;
 
 const Skills = ({ dark }) => {
   const [data, setData] = useState({});
-  const skillColors = ["#007bff", "#28a745", "#ffc107", "#dc3545", "#17a2b8"]; 
+  const orangeColor = "#FFA500"; // Orange color
+  const maxContrast = 100; // Maximum contrast
+  const minContrast = 50; // Minimum contrast
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
@@ -29,7 +31,12 @@ const Skills = ({ dark }) => {
     };
   }, []);
 
-  const skillsToDisplay = data.user && data.user.skills ? data.user.skills.slice(0, 5) : [];
+  const calculateContrast = (percentage) => {
+    // Calculate contrast based on skill percentage
+    return minContrast + (percentage / 100) * (maxContrast - minContrast);
+  };
+
+  const skillsToDisplay = data.user && data.user.skills ? data.user.skills : [];
 
   return (
     <div className="dizme_tm_section">
@@ -42,8 +49,8 @@ const Skills = ({ dark }) => {
                 data-wow-duration="1s"
                 data-align="left"
               >
-                <span>Design is Life</span>
-                <h3>I Develop Skills Regularly to Keep Me Update</h3>
+                <span>{data.user && data.user.about && data.user.about.quote}</span>
+                <h3>{data.user && data.user.about && data.user.about.subTitle}</h3>
                 <p>
                   Most common methods for designing websites that work well on
                   desktop is responsive and adaptive design
@@ -57,7 +64,7 @@ const Skills = ({ dark }) => {
                   <div
                     className="progress_inner skillsInner___"
                     data-value={skill.percentage}
-                    style={{ color: skillColors[i] }} 
+                    style={{ color: orangeColor, filter: `contrast(${calculateContrast(skill.percentage)}%)` }} 
                     key={i}
                   >
                     <span>
@@ -65,7 +72,7 @@ const Skills = ({ dark }) => {
                       <span className="number">{skill.percentage}%</span>
                     </span>
                     <div className="background" >
-                      <div className="bar" style={{ width: `${skill.percentage}%`, backgroundColor: skillColors[i] }}>
+                      <div className="bar" style={{ width: `${skill.percentage}%`, backgroundColor: orangeColor }}>
                         <div className="bar_in" />
                       </div>
                     </div>
@@ -74,7 +81,7 @@ const Skills = ({ dark }) => {
               </div>
             </div>
             <div className="right">
-              <Image src={`Image/skills/${dark ? 2 : 1}.jpg`} alt="Skills" />
+              <img src={`img/skills/${dark ? 2 : 1}.jpg`} alt="Skills" />
             </div>
           </div>
         </div>

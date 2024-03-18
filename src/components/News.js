@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { aTagClick, fatchData } from "../utilits";
+import { fatchData } from "../utilits"; // Assuming you have a function named fatchData
 import BlogPopUp from "./popup/BlogPopUp";
-import Image from 'next/image'; 
+const apiUrl = process.env.API_URL;
 
 const News = () => {
   const [data, setData] = useState([]);
@@ -10,13 +10,21 @@ const News = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedData = await fatchData("/static/blog.json");
-      setData(fetchedData);
-      aTagClick();
+      try {
+        const fetchedData = await fatchData(apiUrl);
+        setData(fetchedData.user.timeline.slice(0, 3)); // Limiting to the first three items
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
   }, []);
+
+  const openPopup = (blog) => {
+    setPopupData(blog);
+    setPopup(true);
+  };
 
   return (
     <div className="dizme_tm_section" id="blog">
@@ -24,66 +32,38 @@ const News = () => {
       <div className="dizme_tm_news">
         <div className="container">
           <div className="dizme_tm_main_title" data-align="center">
-            <span>From My Blog</span>
-            <h3>{`Our Recent Updates, Blog, Tips, Tricks & More`}</h3>
+            <span>My Timeline</span>
+            <h3>{`Work Experience and Achievements`}</h3>
           </div>
           <div className="news_list">
             <ul>
-              {data &&
-                data.map((blog, i) => (
-                  <li className="wow fadeInUp" data-wow-duration="1s" key={i}>
-                    <div className="list_inner">
-                      <div className="image">
-                        <Image src="/Image/thumbs/42-29.jpg" alt="image" width={100} height={100} />
-                        <div
-                          className="main"
-                          data-Image-url={blog && blog.Image}
-                          style={{
-                            backgroundImage: `url(${blog && blog.Image})`,
-                          }}
-                        />
-                        <div className="date">
-                          <h3>{blog && blog.date && blog.date.date}</h3>
-                          <span>{blog && blog.date && blog.date.month}</span>
-                        </div>
-                        <a
-                          className="dizme_tm_full_link"
-                          href="#"
-                          onClick={() => {
-                            setPopupData(blog && blog);
-                            setPopup(true);
-                          }}
-                        />
-                      </div>
-                      <div className="details">
-                        <span className="category">
-                          <a href="#">{blog.category}</a>
-                        </span>
-                        <h3 className="title">
-                          <a href="#">{blog.title}</a>
-                        </h3>
-                      </div>
-                      <div className="news_hidden_details">
-                        <div className="news_popup_informations">
-                          <div className="text">
-                            {blog.details &&
-                              blog.details.map((details, i) => (
-                                <p key={i}>{details}</p>
-                              ))}
-                          </div>
-                        </div>
-                      </div>
+              {data.map((blog, i) => (
+                <li className="wow fadeInUp" data-wow-duration="1s" key={i}>
+                  <div className="list_inner">
+                    <div className="image">
+                      {blog.icon && <img src={blog.icon.url} alt="image" />}
                     </div>
-                  </li>
-                ))}
+                    <div className="details">
+                      <span className="category">
+                        <a href="#">{blog.company_name}</a>
+                      </span>
+                      <h3 className="title">
+                        <a href="#">{blog.jobTitle}</a>
+                      </h3>
+                      <p>{blog.summary}</p>
+                      <button onClick={() => openPopup(blog)}>Read More</button>
+                    </div>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
         <div className="brush_1 wow zoomIn" data-wow-duration="1s">
-          <Image src="/Image/brushes/news/1.png" alt="image" width={100} height={100} />
+          <img src="img/brushes/news/1.png" alt="image" />
         </div>
         <div className="brush_2 wow zoomIn" data-wow-duration="1s">
-          <Image src="/Image/brushes/news/2.png" alt="image" width={100} height={100} />
+          <img src="img/brushes/news/2.png" alt="image" />
         </div>
       </div>
     </div>

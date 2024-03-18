@@ -134,7 +134,7 @@ const Contact = () => {
               </div>
             </div>
             <div className="brush_2 wow fadeInRight" data-wow-duration="1s">
-              <Image src="Image/brushes/contact/2.png" alt="image" />
+              <img src="img/brushes/contact/2.png" alt="image" />
             </div>
 
           </div>
@@ -156,7 +156,7 @@ const Contact = () => {
 
         </div>
         <div className="brush_1 wow fadeInLeft" data-wow-duration="1s">
-          <Image src="Image/brushes/contact/1.png" alt="image" />
+          <img src="img/brushes/contact/1.png" alt="image" />
         </div>
       </div>
     </div>

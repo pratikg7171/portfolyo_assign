@@ -81,7 +81,7 @@ const Testimonial = () => {
                       </div>
                       <div className="short">
                         <div className="image">
-                          <Image src={testimonial.image.url} alt={testimonial.name} />
+                          <img src={testimonial.image.url} alt={testimonial.name} />
                         </div>
                         <div className="detail">
                           <h3>{testimonial.name}</h3>
@@ -99,6 +99,9 @@ const Testimonial = () => {
                   i % 2 !== 0 && 
                   <div key={i} className={`det_image ${i === 1 ? 'one' : i === 3 ? 'three' : ''} wow fadeIn`} data-wow-duration="1s" style={{ backgroundImage: `url(${testimonial.image.url})` }} />
                 ))}
+                <span className="circle green animPulse" />
+              <span className="circle yellow animPulse" />
+              <span className="circle border animPulse" />
             </div>
             <div className="right_details">
               {data && data.user && data.user.testimonials &&
@@ -106,11 +109,14 @@ const Testimonial = () => {
                   i % 2 === 0 && 
                   <div key={i} className={`det_image ${i === 0 ? 'one' : i === 2 ? 'three' : ''} wow fadeIn`} data-wow-duration="1s" style={{ backgroundImage: `url(${testimonial.image.url})` }} />
                 ))}
+                <span className="circle yellow animPulse" />
+              <span className="circle purple animPulse" />
+              <span className="circle border animPulse" />
             </div>
           </div>
         </div>
         <div className="brush_1 wow fadeInRight" data-wow-duration="1s">
-          <Image src="Image/brushes/testimonials/1.png" alt="image" />
+          <img src="img/brushes/testimonials/1.png" alt="image" />
         </div>
       </div>
     </div>

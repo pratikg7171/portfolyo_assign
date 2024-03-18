@@ -12,7 +12,7 @@ const DetailsPopup = ({ open, close }) => {
         <div className="description_wrap">
           <div className="popup_details">
             <div className="top_image">
-              <Image src="Image/thumbs/4-2.jpg" alt="image" />
+              <img src="Image/thumbs/4-2.jpg" alt="image" />
               <div
                 className="main"
                 data-Image-url="Image/portfolio/6.jpg"
@@ -65,7 +65,7 @@ const DetailsPopup = ({ open, close }) => {
                 <li>
                   <div className="list_inner">
                     <div className="my_image">
-                      <Image src="Image/thumbs/4-2.jpg" alt="image" />
+                      <img src="Image/thumbs/4-2.jpg" alt="image" />
                       <div
                         className="main"
                         data-Image-url="Image/portfolio/1.jpg"
@@ -79,7 +79,7 @@ const DetailsPopup = ({ open, close }) => {
                 <li>
                   <div className="list_inner">
                     <div className="my_image">
-                      <Image src="Image/thumbs/4-2.jpg" alt="image" />
+                      <img src="Image/thumbs/4-2.jpg" alt="image" />
                       <div
                         className="main"
                         data-Image-url="Image/portfolio/2.jpg"
@@ -93,7 +93,7 @@ const DetailsPopup = ({ open, close }) => {
                 <li>
                   <div className="list_inner">
                     <div className="my_image">
-                      <Image src="Image/thumbs/4-2.jpg" alt="image" />
+                      <img src="Image/thumbs/4-2.jpg" alt="image" />
                       <div
                         className="main"
                         data-Image-url="Image/portfolio/3.jpg"

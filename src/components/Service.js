@@ -1,9 +1,7 @@
-
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import ServicePopup from "./popup/ServicePopup";
 import Image from 'next/image'; 
-
 
 const apiUrl = process.env.API_URL;
 
@@ -72,7 +70,6 @@ const Service = ({ dark }) => {
               <ul>
                 {services.length > 0 ? (
                   services.map((service, index) => (
-                    
                     <li
                       className={`wow ${(index * 1) % 2 === 0 ? "fadeInLeft" : "fadeInRight"}`}
                       data-wow-duration="1s"
@@ -80,7 +77,7 @@ const Service = ({ dark }) => {
                       onClick={() => onClick(index)}
                     >
                       <div className="list_inner tilt-effect">
-                        <span className="icon">{service.icon && service.icon.svg && parse(service.icon.svg)}</span>
+                        <img className="icon" src={service.image && service.image.url} alt={service.name} width={100} height={100} />
                         <div className="title">
                           <h3>{service.name}</h3>
                           <span className="price">Starts from <span>${service.charge}</span></span>
@@ -89,7 +86,7 @@ const Service = ({ dark }) => {
                           <p>{service.desc}</p>
                         </div>
                         <a className="dizme_tm_full_link" href="#"></a>
-                        <Image className="popup_service_image" src={service.image && service.image.url} alt="image" />
+                        <img className="popup_service_image" src={service.image && service.image.url} alt="image" />
                       </div>
                     </li>
                   ))
@@ -101,10 +98,10 @@ const Service = ({ dark }) => {
           )}
         </div>
         <div className="brush_1 wow fadeInLeft" data-wow-duration="1s">
-          <Image src="Image/brushes/service/5.png" alt="image" />
+          <img src="img/brushes/service/5.png" alt="image" />
         </div>
         <div className="brush_2 wow zoomIn" data-wow-duration="1s">
-          <Image src="Image/brushes/service/6.png" alt="image" />
+          <img src="img/brushes/service/6.png" alt="image" />
         </div>
       </div>
     </div>

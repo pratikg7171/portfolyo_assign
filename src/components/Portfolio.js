@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { dataImage, portfolioHover, fatchData } from "../utilits";
+import { useEffect, useState } from "react";
+import { dataImage, portfolioHover } from "../utilits";
 import DetailsPopup from "./popup/DetailsPopup";
-import Image from 'next/image'; 
-import Isotope from "isotope-layout";
+
+const apiUrl = process.env.API_URL;
 
 const Portfolio = () => {
   useEffect(() => {
@@ -10,58 +10,43 @@ const Portfolio = () => {
     portfolioHover();
   }, []);
 
-  const [data, setData] = useState({});
-  const [youtubeData, setYoutubeData] = useState([]);
-  const [projectsData, setProjectsData] = useState([]);
-  const isotope = useRef();
+  // State variables
   const [filterKey, setFilterKey] = useState("*");
-  const [popup, setPopup] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
 
   useEffect(() => {
-    const fetchDataAsync = async () => {
-      const fetchedData = await fatchData(apiUrl);
-      setData(fetchedData);
-      if (fetchedData?.user?.youtube) {
-        setYoutubeData(fetchedData.user.youtube);
-      }
-      if (fetchedData?.user?.projects) {
-        setProjectsData(fetchedData.user.projects);
-      }
-    };
-    fetchDataAsync();
+    // Fetch projects from API
+    fetch(apiUrl) // Replace "YOUR_API_LINK" with your actual API endpoint
+      .then((response) => response.json())
+      .then((data) => {
+        setProjects(data.user.projects);
+        setFilteredProjects(data.user.projects);
+      }) // Assuming API response has projects key containing an array of projects
+      .catch((error) => console.error("Error fetching projects:", error));
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      isotope.current = new Isotope(".gallery_zoom", {
-        itemSelector: ".grid-item",
-        percentPosition: true,
-        masonry: {
-          columnWidth: ".grid-item",
-        },
-        animationOptions: {
-          duration: 750,
-          easing: "linear",
-          queue: false,
-        },
-      });
-    }, 500);
-    return () => isotope.current.destroy();
-  }, []);
-
-  useEffect(() => {
-    if (isotope.current) {
-      filterKey === "*"
-        ? isotope.current.arrange({ filter: `*` })
-        : isotope.current.arrange({ filter: `.${filterKey}` });
+    // Filter projects based on filterKey
+    if (filterKey === "*") {
+      setFilteredProjects(projects);
+    } else {
+      setFilteredProjects(
+        projects.filter((project) =>
+          project.techStack.includes(filterKey)
+        )
+      );
     }
-  }, [filterKey]);
+  }, [filterKey, projects]);
 
-  const handleFilterKeyChange = (key) => () => {
+  const handleFilterKeyChange = (key) => {
     setFilterKey(key);
   };
 
   const activeBtn = (value) => (value === filterKey ? "current" : "");
+
+  // Popup
+  const [popup, setPopup] = useState(false);
 
   return (
     <div className="dizme_tm_section" id="portfolio">
@@ -81,25 +66,49 @@ const Portfolio = () => {
               <li>
                 <a
                   className={`c-pointer ${activeBtn("*")}`}
-                  onClick={handleFilterKeyChange("*")}
+                  onClick={() => handleFilterKeyChange("*")}
                 >
                   All
                 </a>
               </li>
               <li>
                 <a
-                  className={`c-pointer ${activeBtn("youtube")}`}
-                  onClick={handleFilterKeyChange("youtube")}
+                  className={`c-pointer ${activeBtn("Reactjs")}`}
+                  onClick={() => handleFilterKeyChange("Reactjs")}
                 >
-                  Youtube
+                  Reactjs
                 </a>
               </li>
               <li>
                 <a
-                  className={`c-pointer ${activeBtn("projects")}`}
-                  onClick={handleFilterKeyChange("projects")}
+                  className={`c-pointer ${activeBtn("Nextjs")}`}
+                  onClick={() => handleFilterKeyChange("Nextjs")}
                 >
-                  Projects
+                  Nextjs
+                </a>
+              </li>
+              <li>
+                <a
+                  className={`c-pointer ${activeBtn("Mern")}`}
+                  onClick={() => handleFilterKeyChange("Mern")}
+                >
+                  Mern
+                </a>
+              </li>
+              <li>
+                <a
+                  className={`c-pointer ${activeBtn("CSS")}`}
+                  onClick={() => handleFilterKeyChange("CSS")}
+                >
+                  CSS
+                </a>
+              </li>
+              <li>
+                <a
+                  className={`c-pointer ${activeBtn("TailwindCSS")}`}
+                  onClick={() => handleFilterKeyChange("TailwindCSS")}
+                >
+                  TailwindCSS
                 </a>
               </li>
             </ul>
@@ -107,55 +116,32 @@ const Portfolio = () => {
           <div className="dizme_tm_portfolio_titles" />
           <div className="portfolio_list wow fadeInUp" data-wow-duration="1s">
             <ul className="gallery_zoom grid">
-              {youtubeData && youtubeData.map((video, index) => (
-                <li className="youtube grid-item" key={index}>
-                  <div className="inner">
-                    <div
-                      className="entry dizme_tm_portfolio_animation_wrap"
-                      data-title={video.title}
-                      data-category="Youtube"
-                    >
-                      <a
-                        className="popup-youtube"
-                        href={`https://www.youtube.com/embed/${video.embedId}?autoplay=1`}
-                      >
-                        <Image src="Image/portfolio/1.jpg" alt="image" />
-                        <div
-                          className="main"
-                          data-Image-url="Image/portfolio/1.jpg"
-                        />
-                      </a>
-                    </div>
-                    <div className="mobile_title">
-                      <h3>{video.title}</h3>
-                      <span>Youtube</span>
-                    </div>
-                  </div>
-                </li>
-              ))}
-              {projectsData && projectsData.map((project, sequence) => (
-                <li className="project grid-item" key={sequence}>
+              {filteredProjects.map((project, index) => (
+                <li
+                  className={`grid-item ${project.techStack.join(" ")}`}
+                  key={index}
+                >
                   <div className="inner">
                     <div
                       className="entry dizme_tm_portfolio_animation_wrap"
                       data-title={project.title}
-                      data-category="Projects"
+                      data-category={project.techStack.join(" ")}
                     >
                       <a
                         href={project.liveurl || project.githuburl}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Image src={project.image.url} alt="image" />
+                        <img src={project.image.url} alt={project.title} />
                         <div
                           className="main"
-                          data-Image-url={project.image.url}
+                          data-img-url={project.image.url}
                         />
                       </a>
                     </div>
                     <div className="mobile_title">
                       <h3>{project.title}</h3>
-                      <span>Projects</span>
+                      <span>{project.techStack.join(", ")}</span>
                     </div>
                   </div>
                 </li>
@@ -164,10 +150,10 @@ const Portfolio = () => {
           </div>
         </div>
         <div className="brush_1 wow zoomIn" data-wow-duration="1s">
-          <Image src="Image/brushes/portfolio/1.png" alt="image" />
+          <img src="img/brushes/portfolio/1.png" alt="image" />
         </div>
         <div className="brush_2 wow fadeInRight" data-wow-duration="1s">
-          <Image src="Image/brushes/portfolio/2.png" alt="image" />
+          <img src="img/brushes/portfolio/2.png" alt="image" />
         </div>
       </div>
     </div>

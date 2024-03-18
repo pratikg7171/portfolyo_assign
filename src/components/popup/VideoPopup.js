@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import useClickOutside from "../../useClickOutside";
 import Image from 'next/image'; 
-
 const VideoPopup_ = ({ close, videoID }) => {
   let domNode = useClickOutside(() => {
     close(false);

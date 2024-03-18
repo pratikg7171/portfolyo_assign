@@ -3014,6 +3014,9 @@ input[type="number"] {
   .dizme_tm_news .brush_1 {
     left: 60px;
   }
+  .dizme_tm_portfolio .portfolio_list .main {
+    border-radius: 12px;
+  }
   .dizme_tm_contact .contact_inner .brush_2 {
     right: -80px;
   }
@@ -3051,6 +3054,9 @@ input[type="number"] {
   .dizme_tm_modalbox .main_details {
     flex-direction: column;
     align-items: baseline;
+  }
+  .dizme_tm_portfolio .portfolio_list .main {
+    border-radius: 12px;
   }
   .dizme_tm_modalbox .main_details .textbox {
     width: 100%;

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { fatchData } from "../utilits";
-import Image from 'next/image'; 
+const apiUrl = process.env.API_URL;
 
 const Partners = ({ dark }) => {
-  const [data, setData] = useState([]);
+  const [socialHandles, setSocialHandles] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedData = await fatchData("/static/partners.json");
-        setData(fetchedData);
+        const fetchedData = await fatchData(apiUrl); 
+        setSocialHandles(fetchedData.user.social_handles); // Assuming 'social_handles' is the array you want to map over
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -22,10 +22,11 @@ const Partners = ({ dark }) => {
     <div className="dizme_tm_section">
       <div className="dizme_tm_partners">
         <div className="container">
+          <h2 style={{textAlign: 'center', marginBottom: '40px'}}>Connect with Me!</h2>
           <div className="partners_inner">
             <ul>
-              {data &&
-                data.map((partner, i) => ( // Changed variable name from 'Image' to 'partner'
+              {socialHandles &&
+                socialHandles.map((handle, i) => (
                   <li
                     className="wow fadeIn"
                     data-wow-duration="1s"
@@ -33,13 +34,11 @@ const Partners = ({ dark }) => {
                     data-wow-delay={`0.${i + 1 * 2}s`}
                   >
                     <div className="list_inner">
-                      <Image
-                        src={partner.logo && partner.logo[dark ? "dark" : "light"]}
-                        alt="image"
-                        width={100} // Adjust width and height according to your requirement
-                        height={100}
+                      <img
+                        src={handle.image && handle.image.url}
+                        alt={handle.platform}
                       />
-                      <a className="dizme_tm_full_link" href={partner.link} />
+                      <a className="dizme_tm_full_link" href={handle.url} />
                     </div>
                   </li>
                 ))}
@@ -47,7 +46,7 @@ const Partners = ({ dark }) => {
           </div>
         </div>
         <div className="brush_1 wow fadeInLeft" data-wow-duration="1s">
-          <Image src="/Image/brushes/partners/1.png" alt="image" width={100} height={100} />
+          <img src="/img/brushes/partners/1.png" alt="image"/>
         </div>
       </div>
     </div>

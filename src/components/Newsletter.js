@@ -10,8 +10,8 @@ const Newsletter = () => {
               <div className="background">
                 <div
                   className="dots"
-                  data-Image-url="Image/subscribe/dots.jpg"
-                  style={{ backgroundImage: 'url("Image/subscribe/dots.jpg")' }}
+                  data-img-url="Image/subscribe/dots.jpg"
+                  style={{ backgroundImage: 'url("img/subscribe/dots.jpg")' }}
                 />
                 <div className="overlay" />
               </div>
