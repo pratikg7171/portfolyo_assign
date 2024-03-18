@@ -2,6 +2,8 @@ import Isotope from "isotope-layout";
 import { useEffect, useRef, useState } from "react";
 import { dataImage, portfolioHover, fetchData } from "../utilits";
 import DetailsPopup from "./popup/DetailsPopup";
+import Image from 'next/image'; 
+
 import { fatchData } from "../utilits";
 const apiUrl = process.env.API_URL;
 
@@ -116,10 +118,10 @@ const Portfolio = () => {
                         className="popup-youtube"
                         href={`https://www.youtube.com/embed/${video.embedId}?autoplay=1`}
                       >
-                        <img src="img/portfolio/1.jpg" alt="image" />
+                        <Image src="Image/portfolio/1.jpg" alt="image" />
                         <div
                           className="main"
-                          data-img-url="img/portfolio/1.jpg"
+                          data-Image-url="Image/portfolio/1.jpg"
                         />
                       </a>
                     </div>
@@ -143,10 +145,10 @@ const Portfolio = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <img src={project.image.url} alt="image" />
+                        <Image src={project.image.url} alt="image" />
                         <div
                           className="main"
-                          data-img-url={project.image.url}
+                          data-Image-url={project.image.url}
                         />
                       </a>
                     </div>
@@ -161,10 +163,10 @@ const Portfolio = () => {
           </div>
         </div>
         <div className="brush_1 wow zoomIn" data-wow-duration="1s">
-          <img src="img/brushes/portfolio/1.png" alt="image" />
+          <Image src="Image/brushes/portfolio/1.png" alt="image" />
         </div>
         <div className="brush_2 wow fadeInRight" data-wow-duration="1s">
-          <img src="img/brushes/portfolio/2.png" alt="image" />
+          <Image src="Image/brushes/portfolio/2.png" alt="image" />
         </div>
       </div>
     </div>

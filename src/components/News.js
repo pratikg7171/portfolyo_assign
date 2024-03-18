@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { aTagClick, fatchData } from "../utilits";
 import BlogPopUp from "./popup/BlogPopUp";
+import Image from 'next/image'; 
+
+
 const News = () => {
   const [data, setData] = useState([]);
   const [popupData, setPopupData] = useState({});
@@ -25,12 +28,12 @@ const News = () => {
                   <li className="wow fadeInUp" data-wow-duration="1s" key={i}>
                     <div className="list_inner">
                       <div className="image">
-                        <img src="img/thumbs/42-29.jpg" alt="image" />
+                        <Image src="Image/thumbs/42-29.jpg" alt="image" />
                         <div
                           className="main"
-                          data-img-url={blog && blog.img}
+                          data-Image-url={blog && blog.Image}
                           style={{
-                            backgroundImage: `url(${blog && blog.img})`,
+                            backgroundImage: `url(${blog && blog.Image})`,
                           }}
                         />
                         <div className="date">
@@ -71,10 +74,10 @@ const News = () => {
           </div>
         </div>
         <div className="brush_1 wow zoomIn" data-wow-duration="1s">
-          <img src="img/brushes/news/1.png" alt="image" />
+          <Image src="Image/brushes/news/1.png" alt="image" />
         </div>
         <div className="brush_2 wow zoomIn" data-wow-duration="1s">
-          <img src="img/brushes/news/2.png" alt="image" />
+          <Image src="Image/brushes/news/2.png" alt="image" />
         </div>
       </div>
     </div>

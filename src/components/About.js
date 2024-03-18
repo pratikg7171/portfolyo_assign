@@ -1,6 +1,7 @@
 import Counter from "./Counter";
 import { useEffect, useState } from "react";
 import { fatchData } from "../utilits";
+import Image from 'next/image'; 
 
 const apiUrl = process.env.API_URL;
 
@@ -27,7 +28,8 @@ const About = ({ dark }) => {
           <div className="wrapper">
             <div className="left">
               <div className="image">
-                <img src={`img/about/${dark ? 2 : 1}.jpg`} alt="image" />
+                {/* Replace <img> with <Image> */}
+                <Image src={`/img/about/${dark ? 2 : 1}.jpg`} alt="image" width={500} height={500} />
                 <div className="numbers year">
                   <div className="wrapper">
                     <h3>
@@ -91,10 +93,10 @@ const About = ({ dark }) => {
           </div>
         </div>
         <div className="brush_1 wow fadeInLeft" data-wow-duration="1s">
-          <img src="img/brushes/about/1.png" alt="image" />
+          <Image src="/img/brushes/about/1.png" alt="image" width={200} height={200} />
         </div>
         <div className="brush_2 wow fadeInRight" data-wow-duration="1s">
-          <img src="img/brushes/about/2.png" alt="image" />
+          <Image src="/img/brushes/about/2.png" alt="image" width={200} height={200} />
         </div>
       </div>
     </div>

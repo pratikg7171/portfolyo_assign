@@ -2,6 +2,8 @@ import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import { fatchData } from "../utilits";
 const apiUrl = process.env.API_URL;
+import Image from 'next/image'; 
+
 
 
 
@@ -17,8 +19,8 @@ const Home = ({ dark }) => {
       <div className="dizme_tm_hero">
         <div
           className="background"
-          data-img-url={`img/slider/${dark ? 2 : 1}.jpg`}
-          // style={{ backgroundImage: `img/slider/${dark ? 2 : 1}.jpg` }}
+          data-Image-url={`Image/slider/${dark ? 2 : 1}.jpg`}
+          // style={{ backgroundImage: `Image/slider/${dark ? 2 : 1}.jpg` }}
         />
         <div className="container">
           <div className="content">
@@ -51,7 +53,7 @@ const Home = ({ dark }) => {
   data.user.social_handles.map((social, i) => (
     <li key={i}>
       <a href={social.url}>
-        <img
+        <Image
           src={social.image.url}
           alt={social.platform}
           style={{ maxWidth: "20px", maxHeight: "20px"}} 
@@ -69,7 +71,7 @@ const Home = ({ dark }) => {
             <div className="avatar">
               <div className="image">
                 
-                <img
+                <Image
                   src={data.user && data.user.about && data.user.about.avatar && data.user.about.avatar.url}
                   alt="image"
                 />
@@ -90,7 +92,7 @@ const Home = ({ dark }) => {
               ...(i === 2 ? { bottom: "0", left: "25%", transform: "translateX(-50%)" } : {}), 
             }}
           >
-            <img 
+            <Image 
               src={skill.image.url}
               alt={skill.name}
               style={{ maxWidth: "50px", maxHeight: "50px" }} 

@@ -1,4 +1,6 @@
 import ReactDOM from "react-dom";
+import Image from 'next/image'; 
+
 
 const preloader_ = () => {
   let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(
@@ -127,11 +129,11 @@ export const activeSkillProgress = () => {
 };
 // Data image
 export const dataImage = () => {
-  let d = document.querySelectorAll("[data-img-url");
+  let d = document.querySelectorAll("[data-Image-url");
   for (let i = 0; i < d.length; i++) {
     const element = d[i];
     element.style.backgroundImage = `url(${element.getAttribute(
-      "data-img-url"
+      "data-Image-url"
     )})`;
   }
 };

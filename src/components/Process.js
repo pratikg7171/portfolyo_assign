@@ -1,6 +1,8 @@
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import { fatchData } from "../utilits";
+import Image from 'next/image'; 
+
 const Process = ({ dark }) => {
   const [data, setData] = useState([]);
   useEffect(async () => {
@@ -18,9 +20,9 @@ const Process = ({ dark }) => {
                     <div className="list_inner">
                       <div className="icon">
                         <span>
-                          <img
+                          <Image
                             className="brush"
-                            src={`img/brushes/process${dark ? "/dark" : ""}/${
+                            src={`Image/brushes/process${dark ? "/dark" : ""}/${
                               i + 1
                             }.png`}
                             alt="image"

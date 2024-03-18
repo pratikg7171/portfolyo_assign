@@ -2,6 +2,8 @@
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import ServicePopup from "./popup/ServicePopup";
+import Image from 'next/image'; 
+
 
 const apiUrl = process.env.API_URL;
 
@@ -87,7 +89,7 @@ const Service = ({ dark }) => {
                           <p>{service.desc}</p>
                         </div>
                         <a className="dizme_tm_full_link" href="#"></a>
-                        <img className="popup_service_image" src={service.image && service.image.url} alt="image" />
+                        <Image className="popup_service_image" src={service.image && service.image.url} alt="image" />
                       </div>
                     </li>
                   ))
@@ -99,10 +101,10 @@ const Service = ({ dark }) => {
           )}
         </div>
         <div className="brush_1 wow fadeInLeft" data-wow-duration="1s">
-          <img src="img/brushes/service/5.png" alt="image" />
+          <Image src="Image/brushes/service/5.png" alt="image" />
         </div>
         <div className="brush_2 wow zoomIn" data-wow-duration="1s">
-          <img src="img/brushes/service/6.png" alt="image" />
+          <Image src="Image/brushes/service/6.png" alt="image" />
         </div>
       </div>
     </div>

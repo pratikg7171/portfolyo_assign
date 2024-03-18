@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Image from 'next/image'; 
+
 import SwiperCore, {
   Autoplay,
   EffectFade,
@@ -79,7 +81,7 @@ const Testimonial = () => {
                       </div>
                       <div className="short">
                         <div className="image">
-                          <img src={testimonial.image.url} alt={testimonial.name} />
+                          <Image src={testimonial.image.url} alt={testimonial.name} />
                         </div>
                         <div className="detail">
                           <h3>{testimonial.name}</h3>
@@ -108,7 +110,7 @@ const Testimonial = () => {
           </div>
         </div>
         <div className="brush_1 wow fadeInRight" data-wow-duration="1s">
-          <img src="img/brushes/testimonials/1.png" alt="image" />
+          <Image src="Image/brushes/testimonials/1.png" alt="image" />
         </div>
       </div>
     </div>

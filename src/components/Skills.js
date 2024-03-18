@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { activeSkillProgress, fatchData } from "../utilits";
+import Image from 'next/image'; 
+
 const apiUrl = process.env.API_URL;
 
 const Skills = ({ dark }) => {
@@ -72,7 +74,7 @@ const Skills = ({ dark }) => {
               </div>
             </div>
             <div className="right">
-              <img src={`img/skills/${dark ? 2 : 1}.jpg`} alt="Skills" />
+              <Image src={`Image/skills/${dark ? 2 : 1}.jpg`} alt="Skills" />
             </div>
           </div>
         </div>
