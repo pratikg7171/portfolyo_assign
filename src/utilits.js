@@ -13,6 +13,7 @@ const preloader_ = () => {
   if (preloader) {
     if (!isMobile) {
       setTimeout(function () {
+        +-
         preloader.classList.add("preloaded");
       }, 800);
       setTimeout(function () {
