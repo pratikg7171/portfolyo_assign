@@ -9,7 +9,7 @@ const Partners = ({ dark }) => {
     const fetchData = async () => {
       try {
         const fetchedData = await fatchData(apiUrl); 
-        setSocialHandles(fetchedData.user.social_handles); // Assuming 'social_handles' is the array you want to map over
+        setSocialHandles(fetchedData.user.social_handles); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }

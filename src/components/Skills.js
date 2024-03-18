@@ -6,9 +6,9 @@ const apiUrl = process.env.API_URL;
 
 const Skills = ({ dark }) => {
   const [data, setData] = useState({});
-  const orangeColor = "#FFA500"; // Orange color
-  const maxContrast = 100; // Maximum contrast
-  const minContrast = 50; // Minimum contrast
+  const orangeColor = "#FFA500";
+  const maxContrast = 100; 
+  const minContrast = 50; 
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
@@ -32,7 +32,6 @@ const Skills = ({ dark }) => {
   }, []);
 
   const calculateContrast = (percentage) => {
-    // Calculate contrast based on skill percentage
     return minContrast + (percentage / 100) * (maxContrast - minContrast);
   };
 

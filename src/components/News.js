@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fatchData } from "../utilits"; // Assuming you have a function named fatchData
+import { fatchData } from "../utilits"; 
 import BlogPopUp from "./popup/BlogPopUp";
 const apiUrl = process.env.API_URL;
 
@@ -12,7 +12,7 @@ const News = () => {
     const fetchData = async () => {
       try {
         const fetchedData = await fatchData(apiUrl);
-        setData(fetchedData.user.timeline.slice(0, 3)); // Limiting to the first three items
+        setData(fetchedData.user.timeline.slice(0, 3)); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }

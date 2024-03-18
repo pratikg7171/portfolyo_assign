@@ -9,8 +9,8 @@ const CopyRight = () => {
   useEffect(() => {
     const fetchUsername = async () => {
       try {
-        const userData = await fatchData(apiUrl); // Fetch user data from the API URL
-        setUsername(userData.user.username); // Extract username from the user data
+        const userData = await fatchData(apiUrl); 
+        setUsername(userData.user.username); 
       } catch (error) {
         console.error("Error fetching username:", error);
       }

@@ -1,33 +1,30 @@
-import { useEffect, useState } from "react";
-import { dataImage, portfolioHover } from "../utilits";
+import React, { useEffect, useState } from "react";
+import { fatchData, dataImage, portfolioHover } from "../utilits";
 import DetailsPopup from "./popup/DetailsPopup";
 
 const apiUrl = process.env.API_URL;
 
 const Portfolio = () => {
-  useEffect(() => {
-    dataImage();
-    portfolioHover();
-  }, []);
-
-  // State variables
   const [filterKey, setFilterKey] = useState("*");
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
 
   useEffect(() => {
-    // Fetch projects from API
-    fetch(apiUrl) // Replace "YOUR_API_LINK" with your actual API endpoint
+    dataImage();
+    portfolioHover();
+  }, []);
+
+  useEffect(() => {
+    fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
         setProjects(data.user.projects);
         setFilteredProjects(data.user.projects);
-      }) // Assuming API response has projects key containing an array of projects
+      })
       .catch((error) => console.error("Error fetching projects:", error));
   }, []);
 
   useEffect(() => {
-    // Filter projects based on filterKey
     if (filterKey === "*") {
       setFilteredProjects(projects);
     } else {
@@ -116,10 +113,10 @@ const Portfolio = () => {
           <div className="dizme_tm_portfolio_titles" />
           <div className="portfolio_list wow fadeInUp" data-wow-duration="1s">
             <ul className="gallery_zoom grid">
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project, sequence) => (
                 <li
                   className={`grid-item ${project.techStack.join(" ")}`}
-                  key={index}
+                  key={sequence}
                 >
                   <div className="inner">
                     <div
@@ -132,10 +129,15 @@ const Portfolio = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <img src={project.image.url} alt={project.title} />
+                        <img
+                          src={project.image.url}
+                          alt={project.title}
+                          style={{ width: "100px" }} 
+                        />
                         <div
                           className="main"
                           data-img-url={project.image.url}
+                          style={{ backgroundImage: `url(${project.image.url})` }}
                         />
                       </a>
                     </div>
