@@ -1,3 +1,5 @@
+import Image from 'next/image'; 
+
 const BlogPopUp = ({ data, open, close }) => {
   return (
     <div className={`dizme_tm_modalbox ${open ? "opened" : ""}`}>
@@ -11,11 +13,11 @@ const BlogPopUp = ({ data, open, close }) => {
           <div className="description_wrap">
             <div className="news_popup_informations">
               <div className="image">
-                <img src="img/thumbs/4-2.jpg" alt="image" />
+                <Image src="Image/thumbs/4-2.jpg" alt="image" />
                 <div
                   className="main"
-                  data-img-url={data && data.img}
-                  style={{ backgroundImage: `url(${data && data.img})` }}
+                  data-Image-url={data && data.Image}
+                  style={{ backgroundImage: `url(${data && data.Image})` }}
                 />
               </div>
               <div className="details">

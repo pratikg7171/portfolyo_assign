@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import useClickOutside from "../../useClickOutside";
+import Image from 'next/image'; 
 
 const ImgViews = ({ close, src }) => {
   let domNode = useClickOutside(() => {
@@ -14,7 +15,7 @@ const ImgViews = ({ close, src }) => {
         style={{ overflow: "hidden auto" }}
       >
         <div
-          className={`mfp-container mfp-s-ready mfp-iframe-holder mfp-img-container`}
+          className={`mfp-container mfp-s-ready mfp-iframe-holder mfp-Image-container`}
         >
           <div className="mfp-content" ref={domNode}>
             <div className="mfp-iframe-scaler">
@@ -26,7 +27,7 @@ const ImgViews = ({ close, src }) => {
               >
                 ×
               </button> */}
-              <img className="mfp-img" src={src} />
+              <Image className="mfp-Image" src={src} />
             </div>
           </div>
           <div className="mfp-preloader">Loading...</div>
@@ -37,14 +38,14 @@ const ImgViews = ({ close, src }) => {
 };
 
 const ImageView = () => {
-  const [img, setImg] = useState(false);
-  const [imgValue, setImgValue] = useState(null);
+  const [Image, setImg] = useState(false);
+  const [ImageValue, setImgValue] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
       const a = document.querySelectorAll("a");
       a.forEach((a) => {
-        if (a.href.includes("img/")) {
+        if (a.href.includes("Image/")) {
           if (a.getAttribute("download") === null) {
             a.addEventListener("click", (e) => {
               e.preventDefault();
@@ -58,7 +59,7 @@ const ImageView = () => {
   }, []);
   return (
     <Fragment>
-      {img && <ImgViews close={() => setImg(false)} src={imgValue} />}
+      {Image && <ImgViews close={() => setImg(false)} src={ImageValue} />}
     </Fragment>
   );
 };

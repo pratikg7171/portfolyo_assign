@@ -5,9 +5,16 @@ import Image from 'next/image';
 
 const Process = ({ dark }) => {
   const [data, setData] = useState([]);
-  useEffect(async () => {
-    setData(await fatchData("/static/workProcess.json"));
+
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      const fetchedData = await fatchData("/static/workProcess.json");
+      setData(fetchedData);
+    };
+
+    fetchDataAsync();
   }, []);
+
   return (
     <div className="dizme_tm_section" id="process">
       <div className="dizme_tm_process">
@@ -15,26 +22,24 @@ const Process = ({ dark }) => {
           <div className="list">
             <ul>
               {data &&
-                data.map((data, i) => (
+                data.map((item, i) => (
                   <li className="wow fadeInUp" data-wow-duration="1s" key={i}>
                     <div className="list_inner">
                       <div className="icon">
                         <span>
                           <Image
                             className="brush"
-                            src={`Image/brushes/process${dark ? "/dark" : ""}/${
-                              i + 1
-                            }.png`}
+                            src={`Image/brushes/process${dark ? "/dark" : ""}/${i + 1}.png`}
                             alt="image"
                           />
-                          {parse(data.icons[dark ? "dark" : "light"])}
+                          {parse(item.icons[dark ? "dark" : "light"])}
                         </span>
                       </div>
                       <div className="title">
-                        <h3>{data.title}</h3>
+                        <h3>{item.title}</h3>
                       </div>
                       <div className="text">
-                        <p>{data.dec}</p>
+                        <p>{item.dec}</p>
                       </div>
                     </div>
                   </li>
@@ -46,4 +51,5 @@ const Process = ({ dark }) => {
     </div>
   );
 };
+
 export default Process;

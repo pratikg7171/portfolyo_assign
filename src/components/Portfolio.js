@@ -1,35 +1,36 @@
-import Isotope from "isotope-layout";
 import { useEffect, useRef, useState } from "react";
-import { dataImage, portfolioHover, fetchData } from "../utilits";
+import { dataImage, portfolioHover, fatchData } from "../utilits";
 import DetailsPopup from "./popup/DetailsPopup";
 import Image from 'next/image'; 
-
-import { fatchData } from "../utilits";
-const apiUrl = process.env.API_URL;
+import Isotope from "isotope-layout";
 
 const Portfolio = () => {
   useEffect(() => {
     dataImage();
     portfolioHover();
-    fatchData(); 
   }, []);
 
   const [data, setData] = useState({});
   const [youtubeData, setYoutubeData] = useState([]);
   const [projectsData, setProjectsData] = useState([]);
-  useEffect(async () => {
-    const fetchedData = await fatchData(apiUrl);
-    setData(fetchedData);
-    if (fetchedData && fetchedData.user && fetchedData.user.youtube) {
-      setYoutubeData(fetchedData.user.youtube);
-    }
-    if (fetchedData &&  fetchedData.user && fetchedData.user.projects) {
-      setProjectsData(fetchedData.user.projects);
-    }
-  }, []);
-
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
+  const [popup, setPopup] = useState(false);
+
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      const fetchedData = await fatchData(apiUrl);
+      setData(fetchedData);
+      if (fetchedData?.user?.youtube) {
+        setYoutubeData(fetchedData.user.youtube);
+      }
+      if (fetchedData?.user?.projects) {
+        setProjectsData(fetchedData.user.projects);
+      }
+    };
+    fetchDataAsync();
+  }, []);
+
   useEffect(() => {
     setTimeout(() => {
       isotope.current = new Isotope(".gallery_zoom", {
@@ -47,6 +48,7 @@ const Portfolio = () => {
     }, 500);
     return () => isotope.current.destroy();
   }, []);
+
   useEffect(() => {
     if (isotope.current) {
       filterKey === "*"
@@ -54,12 +56,12 @@ const Portfolio = () => {
         : isotope.current.arrange({ filter: `.${filterKey}` });
     }
   }, [filterKey]);
+
   const handleFilterKeyChange = (key) => () => {
     setFilterKey(key);
   };
-  const activeBtn = (value) => (value === filterKey ? "current" : "");
 
-  const [popup, setPopup] = useState(false);
+  const activeBtn = (value) => (value === filterKey ? "current" : "");
 
   return (
     <div className="dizme_tm_section" id="portfolio">
@@ -105,7 +107,6 @@ const Portfolio = () => {
           <div className="dizme_tm_portfolio_titles" />
           <div className="portfolio_list wow fadeInUp" data-wow-duration="1s">
             <ul className="gallery_zoom grid">
-              {/* Mapping over fetched YouTube data */}
               {youtubeData && youtubeData.map((video, index) => (
                 <li className="youtube grid-item" key={index}>
                   <div className="inner">
@@ -172,4 +173,5 @@ const Portfolio = () => {
     </div>
   );
 };
+
 export default Portfolio;

@@ -1,4 +1,6 @@
 import parse from "html-react-parser";
+import Image from 'next/image'; 
+
 
 const ServicePopup = ({ data, open, close }) => {
   if (!data || !open) {
@@ -18,10 +20,10 @@ const ServicePopup = ({ data, open, close }) => {
           <div className="image">
               {data.image && data.image.url && (
                 <div className="image-container">
-                  <img src={data.image.url} alt="image" />
+                  <Image src={data.image.url} alt="image" />
                   <div
                     className="main"
-                    data-img-url={data.image.url}
+                    data-Image-url={data.image.url}
                     style={{ backgroundImage: `url(${data.image.url})` }}
                   />
                 </div>
