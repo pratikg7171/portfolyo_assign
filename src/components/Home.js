@@ -1,18 +1,25 @@
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import { fatchData } from "../utilits";
-const apiUrl = process.env.API_URL;
 import Image from 'next/image'; 
 
-
-
+const apiUrl = process.env.API_URL;
 
 const Home = ({ dark }) => {
   const [data, setData] = useState({});
-  useEffect(async () => {
-    setData(await fatchData(apiUrl));
-  }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedData = await fatchData(apiUrl);
+        setData(fetchedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="dizme_tm_section" id="home">
@@ -20,7 +27,6 @@ const Home = ({ dark }) => {
         <div
           className="background"
           data-Image-url={`Image/slider/${dark ? 2 : 1}.jpg`}
-          // style={{ backgroundImage: `Image/slider/${dark ? 2 : 1}.jpg` }}
         />
         <div className="container">
           <div className="content">
@@ -29,16 +35,16 @@ const Home = ({ dark }) => {
                 <h3 className="orangeText">{`Hello, I'm`}</h3>
               </div>
               <div className="name">
-              <h3>{data.user && data.user.about && data.user.about.name ? data.user.about.name : "Name"}</h3>
+                <h3>{data.user && data.user.about && data.user.about.name ? data.user.about.name : "Name"}</h3>
               </div>
               <div className="job">
                 <p>
-                A <span className="greenText">{data.user && data.user.about && data.user.about.title ? data.user.about.title : "Title"}</span>{" "}
-                From <span className="purpleText">{data.user && data.user.about && data.user.about.address ? data.user.about.address : "Address"}</span>
+                  A <span className="greenText">{data.user && data.user.about && data.user.about.title ? data.user.about.title : "Title"}</span>{" "}
+                  From <span className="purpleText">{data.user && data.user.about && data.user.about.address ? data.user.about.address : "Address"}</span>
                 </p>
               </div>
               <div className="text">
-              <p>{data.user && data.user.about && data.user.about.subTitle ? data.user.about.subTitle : "Description"}</p>
+                <p>{data.user && data.user.about && data.user.about.subTitle ? data.user.about.subTitle : "Description"}</p>
               </div>
               <div className="button">
                 <div className="dizme_tm_button">
@@ -47,62 +53,59 @@ const Home = ({ dark }) => {
                   </a>
                 </div>
                 <div className="social">
-        <ul>
-        {data.user &&
-  data.user.social_handles &&
-  data.user.social_handles.map((social, i) => (
-    <li key={i}>
-      <a href={social.url}>
-        <Image
-          src={social.image.url}
-          alt={social.platform}
-          style={{ maxWidth: "20px", maxHeight: "20px"}} 
-        />
-      </a>
-    </li>
-  ))}
-
-
-        </ul>
-      </div>
+                  <ul>
+                    {data.user &&
+                      data.user.social_handles &&
+                      data.user.social_handles.map((social, i) => (
+                        <li key={i}>
+                          <a href={social.url}>
+                            <Image
+                              src={social.image.url}
+                              alt={social.platform}
+                              width={20}
+                              height={20}
+                            />
+                          </a>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
               </div>
             </div>
             
             <div className="avatar">
               <div className="image">
-                
                 <Image
                   src={data.user && data.user.about && data.user.about.avatar && data.user.about.avatar.url}
                   alt="image"
+                  width={150}
+                  height={150}
                 />
 
-
-{data.user &&
-    data.user.skills &&
-    data.user.skills.slice(0, 3).map(
-      (skill, i) =>
-        skill.image && (
-          <span
-            key={i}
-            className={`skills ${skill.name} anim_moveBottom`}
-            style={{
-              position: "absolute",
-              ...(i === 0 ? { top: "0", left: "-1%" } : {}),
-              ...(i === 1 ? { top: "11%", right:"38%" } : {}), 
-              ...(i === 2 ? { bottom: "0", left: "25%", transform: "translateX(-50%)" } : {}), 
-            }}
-          >
-            <Image 
-              src={skill.image.url}
-              alt={skill.name}
-              style={{ maxWidth: "50px", maxHeight: "50px" }} 
-            />
-          </span>
-        )
-    )
-  }
-
- 
+                {data.user &&
+                  data.user.skills &&
+                  data.user.skills.slice(0, 3).map(
+                    (skill, i) =>
+                      skill.image && (
+                        <span
+                          key={i}
+                          className={`skills ${skill.name} anim_moveBottom`}
+                          style={{
+                            position: "absolute",
+                            ...(i === 0 ? { top: "0", left: "-1%" } : {}),
+                            ...(i === 1 ? { top: "11%", right:"38%" } : {}), 
+                            ...(i === 2 ? { bottom: "0", left: "25%", transform: "translateX(-50%)" } : {}), 
+                          }}
+                        >
+                          <Image 
+                            src={skill.image.url}
+                            alt={skill.name}
+                            width={50}
+                            height={50}
+                          />
+                        </span>
+                      )
+                  )}
               </div>
             </div>
           </div>
@@ -149,6 +152,5 @@ const Home = ({ dark }) => {
     </div>
   );
 };
+
 export default Home;
-
-
