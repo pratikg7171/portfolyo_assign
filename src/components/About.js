@@ -1,13 +1,25 @@
 import Counter from "./Counter";
 import { useEffect, useState } from "react";
 import { fatchData } from "../utilits";
+
 const apiUrl = process.env.API_URL;
 
 const About = ({ dark }) => {
   const [data, setData] = useState({});
-  useEffect(async () => {
-    setData(await fatchData(apiUrl));
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fatchData(apiUrl);
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
   return (
     <div className="dizme_tm_section" id="about">
       <div className="dizme_tm_about">
@@ -19,7 +31,13 @@ const About = ({ dark }) => {
                 <div className="numbers year">
                   <div className="wrapper">
                     <h3>
-                      <Counter end={data.user && data.user.about && data.user.about.exp_year} />
+                      <Counter
+                        end={
+                          data.user &&
+                          data.user.about &&
+                          data.user.about.exp_year
+                        }
+                      />
                     </h3>
                     <span className="name">
                       Years of
@@ -31,7 +49,13 @@ const About = ({ dark }) => {
                 <div className="numbers project">
                   <div className="wrapper">
                     <h3>
-                      <Counter end={data.user && data.user.about && data.user.about.some_total} />
+                      <Counter
+                        end={
+                          data.user &&
+                          data.user.about &&
+                          data.user.about.some_total
+                        }
+                      />
                     </h3>
                     <span className="name">
                       Total
@@ -43,7 +67,10 @@ const About = ({ dark }) => {
               </div>
             </div>
             <div className="right">
-              <div className="title wow fadeInUp" data-wow-duration="1s">
+              <div
+                className="title wow fadeInUp"
+                data-wow-duration="1s"
+              >
                 <span>{`I'm a `}{data.user && data.user.about && data.user.about.title}</span>
                 <h3>{data.user && data.user.about && data.user.about.subTitle}</h3>
               </div>
@@ -73,4 +100,5 @@ const About = ({ dark }) => {
     </div>
   );
 };
+
 export default About;
