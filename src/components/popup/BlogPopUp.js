@@ -13,24 +13,24 @@ const BlogPopUp = ({ data, open, close }) => {
           <div className="description_wrap">
             <div className="news_popup_informations">
               <div className="image">
-                <img src="img/thumbs/4-2.jpg" alt="image" />
-                <div
-                  className="main"
-                  data-img-url={data && data.img}
-                  style={{ backgroundImage: `url(${data && data.img})` }}
-                />
+                {data.icon && (
+                  <img
+                    src='img/news/1.png'
+                    alt='image'
+                    width={100}
+                    height={100}
+                  />
+                )}
               </div>
               <div className="details">
-                <h3>{data && data.title ? data.title : "Title"}</h3>
+                <h3>{data.jobTitle}</h3>
                 <span>
-                  <a href="#">{data && data.category}</a>
+                  <a href="#">{data.company_name}</a>
                 </span>
                 <div />
               </div>
               <div className="text">
-                {data &&
-                  data.details &&
-                  data.details.map((details, i) => <p key={i}>{details}</p>)}
+                {data.bulletPoints && <p>{data.bulletPoints}</p>}
               </div>
             </div>
           </div>
@@ -39,4 +39,5 @@ const BlogPopUp = ({ data, open, close }) => {
     </div>
   );
 };
+
 export default BlogPopUp;

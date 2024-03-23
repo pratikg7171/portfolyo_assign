@@ -50,8 +50,21 @@ const News = () => {
                       <h3 className="title">
                         <a href="#">{blog.jobTitle}</a>
                       </h3>
-                      <p>{blog.summary}</p>
-                      <button onClick={() => openPopup(blog)}>Read More</button>
+                      <button
+  onClick={() => openPopup(blog)}
+  style={{
+    backgroundColor: 'orange',
+    color: 'white',
+    border: 'none',
+    padding: '5px 10px',
+    fontSize: '11px',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.2)',
+  }}
+>
+  Read More
+</button>
                     </div>
                   </div>
                 </li>

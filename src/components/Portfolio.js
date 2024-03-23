@@ -71,7 +71,7 @@ const Portfolio = () => {
               <li>
                 <a
                   className={`c-pointer ${activeBtn("Reactjs")}`}
-                  onClick={() => handleFilterKeyChange("Reactjs")}
+                  onClick={() => handleFilterKeyChange("Reactjs ")}
                 >
                   Reactjs
                 </a>
@@ -79,7 +79,7 @@ const Portfolio = () => {
               <li>
                 <a
                   className={`c-pointer ${activeBtn("Nextjs")}`}
-                  onClick={() => handleFilterKeyChange("Nextjs")}
+                  onClick={() => handleFilterKeyChange(" Nextjs ")}
                 >
                   Nextjs
                 </a>
@@ -87,7 +87,7 @@ const Portfolio = () => {
               <li>
                 <a
                   className={`c-pointer ${activeBtn("Mern")}`}
-                  onClick={() => handleFilterKeyChange("Mern")}
+                  onClick={() => handleFilterKeyChange(" Mern ")}
                 >
                   Mern
                 </a>
@@ -95,7 +95,7 @@ const Portfolio = () => {
               <li>
                 <a
                   className={`c-pointer ${activeBtn("CSS")}`}
-                  onClick={() => handleFilterKeyChange("CSS")}
+                  onClick={() => handleFilterKeyChange(" CSS")}
                 >
                   CSS
                 </a>
@@ -103,7 +103,7 @@ const Portfolio = () => {
               <li>
                 <a
                   className={`c-pointer ${activeBtn("TailwindCSS")}`}
-                  onClick={() => handleFilterKeyChange("TailwindCSS")}
+                  onClick={() => handleFilterKeyChange(" TailwindCSS")}
                 >
                   TailwindCSS
                 </a>
@@ -114,39 +114,42 @@ const Portfolio = () => {
           <div className="portfolio_list wow fadeInUp" data-wow-duration="1s">
             <ul className="gallery_zoom grid">
               {filteredProjects.map((project, sequence) => (
-                <li
-                  className={`grid-item ${project.techStack.join(" ")}`}
-                  key={sequence}
-                >
-                  <div className="inner">
-                    <div
-                      className="entry dizme_tm_portfolio_animation_wrap"
-                      data-title={project.title}
-                      data-category={project.techStack.join(" ")}
-                    >
-                      <a
-                        href={project.liveurl || project.githuburl}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                // Check if the project's tech stack includes the selected filterKey
+                (filterKey === '*' || project.techStack.includes(filterKey)) && (
+                  <li
+                    className={`grid-item ${project.techStack.join(" ")}`}
+                    key={sequence}
+                  >
+                    <div className="inner">
+                      <div
+                        className="entry dizme_tm_portfolio_animation_wrap"
+                        data-title={project.title}
+                        data-category={project.techStack.join(" ")}
                       >
-                        <img
-                          src={project.image.url}
-                          alt={project.title}
-                          style={{ width: "100px" }} 
-                        />
-                        <div
-                          className="main"
-                          data-img-url={project.image.url}
-                          style={{ backgroundImage: `url(${project.image.url})` }}
-                        />
-                      </a>
+                        <a
+                          href={project.liveurl || project.githuburl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <img
+                            src={project.image.url}
+                            alt={project.title}
+                            style={{ width: "100px" }} 
+                          />
+                          <div
+                            className="main"
+                            data-img-url={project.image.url}
+                            style={{ backgroundImage: `url(${project.image.url})` }}
+                          />
+                        </a>
+                      </div>
+                      <div className="mobile_title">
+                        <h3>{project.title}</h3>
+                        <span>{project.techStack.join(", ")}</span>
+                      </div>
                     </div>
-                    <div className="mobile_title">
-                      <h3>{project.title}</h3>
-                      <span>{project.techStack.join(", ")}</span>
-                    </div>
-                  </div>
-                </li>
+                  </li>
+                )
               ))}
             </ul>
           </div>

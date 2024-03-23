@@ -19,8 +19,10 @@ const Home = ({ dark }) => {
 
     fetchDataFromApi();
   }, []);
+  const colors = ['#FFA500', '#FF69B4']; // Orange and pink colors
 
   return (
+    
     <div className="dizme_tm_section" id="home">
       <div className="dizme_tm_hero">
         <div
@@ -71,37 +73,47 @@ const Home = ({ dark }) => {
             </div>
             
             <div className="avatar">
-              <div className="image">
-                {data.user?.about?.avatar?.url && (
-                  <img
-                    src={data.user?.about?.avatar?.url}
-                    alt="image"
-                  />
-                )}
+            <div className="image">
+  {data.user?.about?.avatar?.url && (
+    <img
+      src={data.user?.about?.avatar?.url}
+      alt="image"
+      className="avatar-image"
+      id="avatar-image"
+      style={{
+        borderTopLeftRadius:'25%',
+        borderBottomRightRadius:'25%',
+        animation: 'pulse 5s infinite alternate',
+        boxShadow: `0 0 50px ${colors[Math.floor(Math.random()*colors.length)]}`
+      }}
+    />
+  )}
 
-                {data.user?.skills?.slice(0, 3).map((skill, i) => (
-                  skill.image && (
-                    <span
-                      key={i}
-                      className={`skills ${skill.name} anim_moveBottom`}
-                      style={{
-                        position: "absolute",
-                        ...(i === 0 ? { top: "0", left: "-1%" } : {}),
-                        ...(i === 1 ? { top: "11%", right:"38%" } : {}), 
-                        ...(i === 2 ? { bottom: "0", left: "25%", transform: "translateX(-50%)" } : {}), 
-                      }}
-                    >
-                      <img 
-                        src={skill.image.url}
-                        alt={skill.name}
-                        width={50}
-                        height={50}
-                      />
-                    </span>
-                  )
-                ))}
-              </div>
-            </div>
+
+    {data.user?.skills?.slice(0, 3).map((skill, i) => (
+      skill.image && (
+        <span
+          key={i}
+          className={`skills ${skill.name} anim_moveBottom`}
+          style={{
+            position: "absolute",
+            ...(i === 0 ? { top: "0", left: "-1%" } : {}),
+            ...(i === 1 ? { top: "11%", right: "38%" } : {}),
+            ...(i === 2 ? { bottom: "0", left: "25%", transform: "translateX(-50%)" } : {}),
+          }}
+        >
+          <img
+            src={skill.image.url}
+            alt={skill.name}
+            width={50}
+            height={50}
+          />
+        </span>
+      )
+    ))}
+  </div>
+</div>
+
           </div>
         </div>
         <div className="dizme_tm_down">
